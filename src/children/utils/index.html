@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test</title>
+  </head>
+  <body>
+    <script src="./fanyu-utils.js"></script>
+    <script>
+      const fn = function () {
+        console.log("fn_test hahha");
+      };
+      let data_source = {
+        a: 1,
+        b: ["22", { a: 33, b: ["kkk", fn] }],
+        c: "",
+        d: {
+          a: "",
+        },
+      };
+      data_source.c = data_source.d.a;
+      data_source.d = { a: data_source.c };
+      let cp = deepClonetest(data_source);
+      cp.a = 89;
+      cp.c = [11111, 22];
+      console.log(cp, data_source);
+    </script>
+  </body>
+</html>

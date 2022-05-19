@@ -1,0 +1,20 @@
+{
+  "name": "koa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "commonjs",
+  "scripts": {
+    "start": "nodemon ./index.js"
+  },
+  "dependencies": {
+    "async": "^3.2.3",
+    "fs-extra": "^10.0.1",
+    "koa": "^2.13.4",
+    "koa-cors": "^0.0.16",
+    "koa-router": "^10.1.1",
+    "koa-static": "^5.0.0",
+    "multiparty": "^4.2.3",
+    "nodemon": "^2.0.15"
+  }
+}

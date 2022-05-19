@@ -1,0 +1,29 @@
+.App {
+  text-align: center;
+  margin: auto;
+  width: fit-content;
+}
+.inner{
+    height: 100%;
+    background: linear-gradient(45deg, #000 0, #000 50%, #fff 50%);
+    position: relative;
+}
+.inner-text{
+  font-size: 25px;
+  animation: move 3s infinite linear alternate;
+  mix-blend-mode: difference;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  color: #fff;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(200px);
+  }
+}

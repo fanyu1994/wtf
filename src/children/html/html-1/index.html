@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="file" id="ipt" />
+    <button id="btn">上传</button>
+    <script>
+      const ipt = document.querySelector("#ipt");
+      const btn = document.querySelector("#btn");
+      const down = document.querySelector("#down");
+      // 预览图片同步
+      ipt.addEventListener("change", (e) => {
+        let file = e.target.files[0];
+        const img = new Image();
+        img.setAttribute("src", window.URL.createObjectURL(file));
+        document.querySelector("body").appendChild(img);
+      });
+      // 异步图片预览
+      ipt.addEventListener("change", (e) => {
+        let file = e.target.files[0];
+        const img = new Image();
+
+        let fileReader = new FileReader();
+        fileReader.onload = () => {
+          const img = new Image();
+          img.setAttribute("src", fileReader.result);
+          document.querySelector("body").appendChild(img);
+        };
+
+        fileReader.readAsDataURL(file);
+      });
+      // 下载文件
+      ipt.addEventListener("change", () => {
+        let file = window.URL.createObjectURL(ipt.files[0]);
+        let a = document.createElement("a");
+        a.setAttribute("download", "yyydsss");
+        a.setAttribute("href", file);
+        let atxt = document.createTextNode("球吧闭幕聂牛!!");
+        a.appendChild(atxt);
+        document.querySelector("img").addEventListener("load", () => {
+          document.querySelector("img").insertAdjacentElement("beforebegin", a);
+        });
+      });
+      // 上传图片
+      btn.addEventListener("click", upload);
+
+      function upload(e, index = 0) {
+        const file = ipt.files[0];
+        const [fileName, ext] = file.name.split(".");
+        const chunkSize = 1024;
+        const total = Math.ceil(file.size / chunkSize);
+        let start = index * chunkSize;
+        if (start > file.size) return;
+        const fileBlob = file.slice(start, start + chunkSize);
+
+        const formData = new FormData();
+        const blobFile = new File([fileBlob], `${fileName}${index}.${ext}`);
+        formData.append("file", blobFile);
+        formData.append("name", fileName);
+        formData.append("total", total);
+        formData.append("index", index + 1);
+        fetch("http://localhost:3030/page/upload", {
+          method: "post",
+          body: formData,
+        }).then((res) => {
+          upload(e, ++index);
+        });
+      }
+    </script>
+  </body>
+</html>

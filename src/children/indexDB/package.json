@@ -1,0 +1,16 @@
+{
+  "name": "indexDB",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "fanyu",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "lodash": "^4.17.21",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
+  }
+}
